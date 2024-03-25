@@ -27,16 +27,15 @@ class SecondActivity : AppCompatActivity() {
         val btn_back = findViewById<Button>(R.id.btn_back)
         btn_back.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+
+            // startActivity(intent) 만으로도 MainActivity로 이동이 가능함
+            // 다만, 그럴 경우엔 기존의 MainActivitiy는 살아있고, 그 위에 차곡 차곡 쌓인다고 함.
+            // FLAG_ACTIVITY_CLEAR_TOP를 사용하면 액티비티 이동 시 이동하려는 Activity를 최상단으로 올리고 나머지는 모두 삭제.
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             finish()
-
-            // 그냥 finish()만 할 경우 기존의 숫자가 맞은 상태로 멈춰 있음.
-            // 그래서 Intent를 통해서 startActivity(intent)로 새로운 액티비티를 시작하니까 처음부터 진행되는 것을 확인
-
-            // 개인적으로 생각해 본 것은 SecondActivity가 종료 되면서,
-            // startActivity(intent)를 통해 액티비티 생명 주기에 따라 새로운 Activity가 onCreate()되면서
-            // 새로운 값이 랜덤으로 형성 되고, 카운트가 시작 되는 것이 아닐까 생각함.
 
         }
     }
 }
+
