@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         var randomValue = random.nextInt(1, 100)
 
         randomTextView.text = randomValue.toString()
+
     }
 
     private fun setJobAndLaunch() {
@@ -56,9 +57,9 @@ class MainActivity : AppCompatActivity() {
                     textView.text = i.toString()
                     delay(500)
 
-                    /* if (i == 100) {         // 100이 됐을 때 다시 1부터 시작하기.
-                        setJobAndLaunch()
-                    }*/
+                     if (i == 100) {
+                        setJobAndLaunch()       // 100이 됐을 때 다시 1부터 시작하기.
+                    }
                 }
             }
         }
@@ -68,10 +69,12 @@ class MainActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.spartaTextView)
         val randomTextView = findViewById<TextView>(R.id.textViewRandom)
 
-        if (textView == randomTextView) {
+        if (textView.text == randomTextView.text) {
             Toast.makeText(this, "숫자가 일치합니다.", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "숫자가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+
+            setJobAndLaunch()                // 틀렸을 시 다시 1부터 시작
         }
     }
 }
