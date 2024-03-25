@@ -1,5 +1,6 @@
 package com.lim.basic_assignment
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.clickButton)
         button.setOnClickListener {
             job?.cancel()
-            checkAnswerAndShowToas()
+            checkAnswerAndShowToast()
         }
     }
 
@@ -65,12 +66,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkAnswerAndShowToas() {
+    private fun checkAnswerAndShowToast() {
         val textView = findViewById<TextView>(R.id.spartaTextView)
         val randomTextView = findViewById<TextView>(R.id.textViewRandom)
 
         if (textView.text == randomTextView.text) {
             Toast.makeText(this, "숫자가 일치합니다.", Toast.LENGTH_SHORT).show()
+            val intent  = Intent(this, SecondActivity::class.java)
+            val count = textView.text.toString()
+            intent.putExtra("Count", count) // Intent 사용에 익숙해지기 위해 사용해봄.
+            startActivity(intent)
         } else {
             Toast.makeText(this, "숫자가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
 
